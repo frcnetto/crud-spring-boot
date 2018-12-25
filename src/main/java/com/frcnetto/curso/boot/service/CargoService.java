@@ -11,5 +11,6 @@ public interface CargoService {
 	void excluir(Long primaryKey);
 	Cargo buscarPorId(Long primaryKey);
 	List<Cargo> buscarTodos();
+	boolean temFuncionarios( Long primaryKey );
 
 }

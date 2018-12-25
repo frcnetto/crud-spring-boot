@@ -55,18 +55,18 @@ public class DepartamentoController {
 
 	@PostMapping( "/editar" )
 	public String editar( Departamento departamento, ModelMap model ) {
-		
+
 		try {
-		
+
 			service.editar( departamento );
 			model.addAttribute( "success", "Departamento atualizado com sucesso." );
-		
-		} 
-		
-		catch (Exception e) {
+
+		}
+
+		catch ( Exception e ) {
 			model.addAttribute( "fail", "Falha na edição do departamento. " + e.getMessage() );
 		}
-		
+
 		return listar( model );
 	}
 

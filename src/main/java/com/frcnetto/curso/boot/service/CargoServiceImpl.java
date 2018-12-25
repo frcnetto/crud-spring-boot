@@ -9,35 +9,55 @@ import org.springframework.transaction.annotation.Transactional;
 import com.frcnetto.curso.boot.dao.CargoDAO;
 import com.frcnetto.curso.boot.domain.Cargo;
 
-@Service @Transactional
-public class CargoServiceImpl implements CargoService{
-	
+@Service
+@Transactional
+public class CargoServiceImpl implements CargoService {
+
 	@Autowired
 	private CargoDAO dao;
 
 	@Override
-	public void salvar(Cargo cargo) {
-		dao.save(cargo);
+	public void salvar( Cargo cargo ) {
+
+		dao.save( cargo );
+
 	}
 
 	@Override
-	public void editar(Cargo cargo) {
-		dao.update(cargo);
+	public void editar( Cargo cargo ) {
+
+		dao.update( cargo );
+
 	}
 
 	@Override
-	public void excluir(Long primaryKey) {
-		dao.delete(primaryKey);
+	public void excluir( Long primaryKey ) {
+
+		dao.delete( primaryKey );
+
 	}
 
-	@Override @Transactional(readOnly = true)
-	public Cargo buscarPorId(Long primaryKey) {
-		return dao.find(primaryKey);
+	@Override
+	@Transactional( readOnly = true )
+	public Cargo buscarPorId( Long primaryKey ) {
+
+		return dao.find( primaryKey );
+
 	}
 
-	@Override @Transactional(readOnly = true)
-	public List<Cargo> buscarTodos() {
+	@Override
+	@Transactional( readOnly = true )
+	public List< Cargo > buscarTodos() {
+
 		return dao.findAll();
+
+	}
+
+	@Override
+	public boolean temFuncionarios( Long primaryKey ) {
+
+		return buscarPorId( primaryKey ).getFuncionarios().isEmpty() ? false : true;
+
 	}
 
 }
