@@ -16,13 +16,13 @@ public class FuncionarioServiceImpl implements FuncionarioService{
 	private FuncionarioDAO dao;
 
 	@Override
-	public void salvar(Funcionario departamento) {
-		dao.save(departamento);
+	public void salvar(Funcionario funcionario) {
+		dao.save(funcionario);
 	}
 
 	@Override
-	public void editar(Funcionario departamento) {
-		dao.update(departamento);
+	public void editar(Funcionario funcionario) {
+		dao.update(funcionario);
 	}
 
 	@Override

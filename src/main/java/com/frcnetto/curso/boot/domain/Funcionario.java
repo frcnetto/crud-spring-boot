@@ -11,40 +11,48 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 @Entity
-@Table(name = "FUNCIONARIOS")
-public class Funcionario extends AbstractEntity<Long>{
+@Table( name = "FUNCIONARIOS" )
+public class Funcionario extends AbstractEntity< Long > {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8646430405028146998L;
-	
-	@Column(nullable = false, unique = true)
+
+	@Column( nullable = false, unique = true )
 	private String nome;
-	
-	@Column(nullable = false, columnDefinition = "DECIMAL(9,2) DEFAULT 0.00")
+
+	@Column( nullable = false, columnDefinition = "DECIMAL(9,2) DEFAULT 0.00" )
+	@NumberFormat( style = Style.CURRENCY, pattern = "#,##0.00" )
 	private BigDecimal salario;
 
-	@Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
+	@Column( name = "data_entrada", nullable = false, columnDefinition = "DATE" )
+	@DateTimeFormat( iso = ISO.DATE )
 	private LocalDate dataEntrada;
-	
-	@Column(name = "data_saida", columnDefinition = "DATE")
+
+	@Column( name = "data_saida", columnDefinition = "DATE" )
+	@DateTimeFormat( iso = ISO.DATE )
 	private LocalDate dataSaida;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_endereco_fk")
+
+	@OneToOne( cascade = CascadeType.ALL)
+	@JoinColumn( name = "id_endereco_fk" )
 	private Endereco endereco;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "id_cargo_fk")
+	@JoinColumn( name = "id_cargo_fk" )
 	private Cargo cargo;
 
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome( String nome ) {
 		this.nome = nome;
 	}
 
@@ -52,7 +60,7 @@ public class Funcionario extends AbstractEntity<Long>{
 		return salario;
 	}
 
-	public void setSalario(BigDecimal salario) {
+	public void setSalario( BigDecimal salario ) {
 		this.salario = salario;
 	}
 
@@ -60,7 +68,7 @@ public class Funcionario extends AbstractEntity<Long>{
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(LocalDate dataEntrada) {
+	public void setDataEntrada( LocalDate dataEntrada ) {
 		this.dataEntrada = dataEntrada;
 	}
 
@@ -68,7 +76,7 @@ public class Funcionario extends AbstractEntity<Long>{
 		return dataSaida;
 	}
 
-	public void setDataSaida(LocalDate dataSaida) {
+	public void setDataSaida( LocalDate dataSaida ) {
 		this.dataSaida = dataSaida;
 	}
 
@@ -76,7 +84,7 @@ public class Funcionario extends AbstractEntity<Long>{
 		return endereco;
 	}
 
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco( Endereco endereco ) {
 		this.endereco = endereco;
 	}
 
@@ -84,7 +92,7 @@ public class Funcionario extends AbstractEntity<Long>{
 		return cargo;
 	}
 
-	public void setCargo(Cargo cargo) {
+	public void setCargo( Cargo cargo ) {
 		this.cargo = cargo;
 	}
 }
