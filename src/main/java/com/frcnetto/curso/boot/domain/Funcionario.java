@@ -10,6 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -25,13 +30,18 @@ public class Funcionario extends AbstractEntity< Long > {
 	 */
 	private static final long serialVersionUID = -8646430405028146998L;
 
+	@NotBlank
+	@Size( max = 255, min = 3 )
 	@Column( nullable = false, unique = true )
 	private String nome;
 
+	@NotNull
 	@Column( nullable = false, columnDefinition = "DECIMAL(9,2) DEFAULT 0.00" )
 	@NumberFormat( style = Style.CURRENCY, pattern = "#,##0.00" )
 	private BigDecimal salario;
 
+	@NotNull
+	@PastOrPresent( message = "{PastOrPresent.funcionario.dataEntrada}" )
 	@Column( name = "data_entrada", nullable = false, columnDefinition = "DATE" )
 	@DateTimeFormat( iso = ISO.DATE )
 	private LocalDate dataEntrada;
@@ -40,10 +50,12 @@ public class Funcionario extends AbstractEntity< Long > {
 	@DateTimeFormat( iso = ISO.DATE )
 	private LocalDate dataSaida;
 
-	@OneToOne( cascade = CascadeType.ALL)
+	@Valid
+	@OneToOne( cascade = CascadeType.ALL )
 	@JoinColumn( name = "id_endereco_fk" )
 	private Endereco endereco;
 
+	@NotNull( message = "{NotNull.funcionario.cargo}" )
 	@ManyToOne
 	@JoinColumn( name = "id_cargo_fk" )
 	private Cargo cargo;

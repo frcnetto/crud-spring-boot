@@ -1,8 +1,11 @@
 package com.frcnetto.curso.boot.web.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +33,10 @@ public class DepartamentoController {
 	}
 
 	@PostMapping( "/salvar" )
-	public String salvar( Departamento departamento, ModelMap model ) {
+	public String salvar( @Valid Departamento departamento, BindingResult result, ModelMap model ) {
+		
+		if (result.hasErrors())
+			return "/departamento/cadastro";
 		
 		try {
 			
@@ -54,8 +60,11 @@ public class DepartamentoController {
 	}
 
 	@PostMapping( "/editar" )
-	public String editar( Departamento departamento, ModelMap model ) {
+	public String editar( @Valid Departamento departamento, BindingResult result, ModelMap model ) {
 
+		if (result.hasErrors())
+			return "/departamento/cadastro";
+		
 		try {
 
 			service.editar( departamento );

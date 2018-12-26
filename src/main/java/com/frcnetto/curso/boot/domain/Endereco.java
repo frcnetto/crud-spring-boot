@@ -5,35 +5,50 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "ENDERECOS")
-public class Endereco extends AbstractEntity<Long>{
+@Table( name = "ENDERECOS" )
+public class Endereco extends AbstractEntity< Long > {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3749566593283874036L;
-	
-	@Column(nullable = false)
+
+	@NotBlank
+	@Size( min = 3, max = 255 )
+	@Column( nullable = false )
 	private String logradouro;
 
-	@Column(nullable = false)
+	@NotBlank
+	@Size( min = 3, max = 255 )
+	@Column( nullable = false )
 	private String bairro;
-	
-	@Column(nullable = false)
+
+	@NotBlank
+	@Size( min = 3, max = 255 )
+	@Column( nullable = false )
 	private String cidade;
-	
-	@Column(nullable = false, length = 2)
-	@Enumerated(EnumType.STRING)
+
+	@NotNull( message = "{NotNull.endereco.uf}" )
+	@Column( nullable = false, length = 2 )
+	@Enumerated( EnumType.STRING )
 	private UF uf;
-	
-	@Column(nullable = false, length = 9)
+
+	@NotBlank
+	@Size( min = 9, max = 9, message = "{Size.endereco.cep}" )
+	@Column( nullable = false, length = 9 )
 	private String cep;
 
-	@Column(nullable = false, length = 5)
+	@NotNull( message = "{NotNull.endereco.numero}" )
+	@Digits( integer = 5, fraction = 0 )
+	@Column( nullable = false, length = 5 )
 	private String numero;
-	
+
 	@Column
 	private String complemento;
 
@@ -41,7 +56,7 @@ public class Endereco extends AbstractEntity<Long>{
 		return logradouro;
 	}
 
-	public void setLogradouro(String logradouro) {
+	public void setLogradouro( String logradouro ) {
 		this.logradouro = logradouro;
 	}
 
@@ -49,7 +64,7 @@ public class Endereco extends AbstractEntity<Long>{
 		return bairro;
 	}
 
-	public void setBairro(String bairro) {
+	public void setBairro( String bairro ) {
 		this.bairro = bairro;
 	}
 
@@ -57,7 +72,7 @@ public class Endereco extends AbstractEntity<Long>{
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade( String cidade ) {
 		this.cidade = cidade;
 	}
 
@@ -65,7 +80,7 @@ public class Endereco extends AbstractEntity<Long>{
 		return uf;
 	}
 
-	public void setUf(UF uf) {
+	public void setUf( UF uf ) {
 		this.uf = uf;
 	}
 
@@ -73,7 +88,7 @@ public class Endereco extends AbstractEntity<Long>{
 		return cep;
 	}
 
-	public void setCep(String cep) {
+	public void setCep( String cep ) {
 		this.cep = cep;
 	}
 
@@ -81,7 +96,7 @@ public class Endereco extends AbstractEntity<Long>{
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero( String numero ) {
 		this.numero = numero;
 	}
 
@@ -89,7 +104,7 @@ public class Endereco extends AbstractEntity<Long>{
 		return complemento;
 	}
 
-	public void setComplemento(String complemento) {
+	public void setComplemento( String complemento ) {
 		this.complemento = complemento;
 	}
 }
